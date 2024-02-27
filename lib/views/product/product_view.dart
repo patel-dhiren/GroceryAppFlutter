@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../model/category.dart';
 import '../../widget/custom_button.dart';
 
 class ProductView extends StatelessWidget {
@@ -49,20 +48,20 @@ class ProductView extends StatelessWidget {
                   maxLines: 2,
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 20,
                 ),
-                /*DropdownButtonFormField(
-                  decoration: InputDecoration(labelText: 'Product Description'),
-                  items: List.generate(
-                    3,
-                    (index) => DropdownMenuItem(
-                      child: Text('text'),
-                    ),
-                  ),
-                  onChanged: (Object? value) {},
-                ),*/
+                DropdownButtonFormField(
+                  onChanged: (value) {},
+                  items: <String>['Option 1', 'Option 2', 'Option 3']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
                 SizedBox(
-                  height: 8,
+                  height: 12,
                 ),
                 Row(
                   children: [

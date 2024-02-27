@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants/constants.dart';
+import 'package:grocery_app/model/category.dart';
 import 'package:grocery_app/views/category/category_view.dart';
 import 'package:grocery_app/views/category_list/category_list_view.dart';
 import 'package:grocery_app/views/home/home_view.dart';
@@ -8,10 +9,7 @@ import 'package:grocery_app/views/product/product_view.dart';
 import 'package:grocery_app/views/product_list/product_list_view.dart';
 import 'package:grocery_app/views/splash/splash_view.dart';
 
-
 class AppRoute {
-
-
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppConstant.splashView:
@@ -32,8 +30,13 @@ class AppRoute {
           builder: (context) => CategoryListView(),
         );
       case AppConstant.categoryView:
+        Category? category =
+            settings.arguments != null ? settings.arguments as Category : null;
+
         return MaterialPageRoute(
-          builder: (context) => CategoryView(),
+          builder: (context) => CategoryView(
+            category: category,
+          ),
         );
       case AppConstant.productListView:
         return MaterialPageRoute(
@@ -43,7 +46,6 @@ class AppRoute {
         return MaterialPageRoute(
           builder: (context) => ProductView(),
         );
-
 
       default:
         return MaterialPageRoute(

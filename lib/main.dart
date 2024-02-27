@@ -12,7 +12,9 @@ Future<void> main() async {
         apiKey: 'AIzaSyCbhPeDncItRtCDqlHbz07sJv-OUAxlGa0',
         appId: '1:570297416659:android:770d7fd93fdf8466dd8d26',
         messagingSenderId: '570297416659',
-        projectId: 'grocerystoreapp-fa367'),
+        projectId: 'grocerystoreapp-fa367',
+      storageBucket: 'grocerystoreapp-fa367.appspot.com'
+    ),
   );
   runApp(MyApp());
 }
