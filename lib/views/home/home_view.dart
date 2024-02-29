@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, AppConstant.productListView);
               },
-              child: _buildDashboardTile('Products', 0, Colors.blue.shade100,
+              child: _buildDashboardTile('Items', 0, Colors.blue.shade100,
                   Assets.images.product.path),
             ),
             _buildDashboardTile('Users', 0, Colors.pinkAccent.shade100,

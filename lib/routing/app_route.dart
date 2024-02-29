@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants/constants.dart';
 import 'package:grocery_app/model/category.dart';
+import 'package:grocery_app/model/item.dart';
 import 'package:grocery_app/views/category/category_view.dart';
 import 'package:grocery_app/views/category_list/category_list_view.dart';
 import 'package:grocery_app/views/home/home_view.dart';
+import 'package:grocery_app/views/item/item_view.dart';
 import 'package:grocery_app/views/login/login_view.dart';
-import 'package:grocery_app/views/product/product_view.dart';
-import 'package:grocery_app/views/product_list/product_list_view.dart';
+import 'package:grocery_app/views/item_list/item_list_view.dart';
 import 'package:grocery_app/views/splash/splash_view.dart';
 
 class AppRoute {
@@ -40,11 +41,15 @@ class AppRoute {
         );
       case AppConstant.productListView:
         return MaterialPageRoute(
-          builder: (context) => ProductListView(),
+          builder: (context) => ItemListView(),
         );
       case AppConstant.productView:
+
+        Item? item =
+        settings.arguments != null ? settings.arguments as Item : null;
+
         return MaterialPageRoute(
-          builder: (context) => ProductView(),
+          builder: (context) => ItemView(item: item,),
         );
 
       default:

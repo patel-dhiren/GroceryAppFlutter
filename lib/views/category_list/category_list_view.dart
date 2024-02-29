@@ -80,7 +80,9 @@ class _CategoryListViewState extends State<CategoryListView> {
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           child: ListTile(
                             onTap: () {
-                              Navigator.pushNamed(context, AppConstant.categoryView, arguments: snapshot.data![index]);
+                              Navigator.pushNamed(
+                                  context, AppConstant.categoryView,
+                                  arguments: snapshot.data![index]);
                             },
                             leading: CircleAvatar(
                               radius: 30,
