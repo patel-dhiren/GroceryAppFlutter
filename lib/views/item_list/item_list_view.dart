@@ -12,9 +12,7 @@ class ItemListView extends StatefulWidget {
 }
 
 class _ItemListViewState extends State<ItemListView> {
-
-  Future<void> _showDeleteDialog(
-      Item item, BuildContext context) async {
+  Future<void> _showDeleteDialog(Item item, BuildContext context) async {
     var res = await showDialog(
       context: context,
       builder: (context) {
@@ -42,7 +40,6 @@ class _ItemListViewState extends State<ItemListView> {
       await FirebaseService().deleteItem(item.id!);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,34 +80,11 @@ class _ItemListViewState extends State<ItemListView> {
                           child: ListTile(
                             isThreeLine: true,
                             onTap: () {
-                               Navigator.pushNamed(context, AppConstant.productView, arguments: snapshot.data![index]);
+                              Navigator.pushNamed(
+                                  context, AppConstant.productView,
+                                  arguments: snapshot.data![index]);
                             },
-                            leading: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.orange.shade100,
-                              foregroundImage: NetworkImage(
-                                item.imageUrl,
-                              ),
-                            ),
-                            /*title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  item.name,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    *//*_showDeleteDialog(
-                                  snapshot.data![index], context);*//*
-                                  },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.grey.shade400,
-                                  ),
-                                ),
-                              ],
-                            ),*/
+                            leading: Image.network(item.imageUrl, width: 80, height: 80,),
                             subtitle: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,24 +93,16 @@ class _ItemListViewState extends State<ItemListView> {
                                 SizedBox(
                                   height: 24,
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         item.name,
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                                      ),
-                                      Align(
-                                        child: IconButton(
-                                          onPressed: () {
-                                            _showDeleteDialog(
-                                    snapshot.data![index], context);
-                                          },
-                                          icon: Icon(
-                                            Icons.delete,
-                                            color: Colors.grey.shade400,
-                                          ),
-                                        ),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
                                       ),
                                     ],
                                   ),
@@ -144,13 +110,33 @@ class _ItemListViewState extends State<ItemListView> {
                                 Text(item.description),
                                 Text('Price : ${item.price} /${item.unit}'),
                                 Text('Stock : ${item.stock} ${item.unit}'),
-
+                              ],
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Checkbox(
+                                  value: snapshot.data![index].inTop,
+                                  onChanged: (value) {
+                                    FirebaseService().updateInTopStatus(snapshot.data![index].id!, value!);
+                                  },
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    _showDeleteDialog(
+                                        snapshot.data![index], context);
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.grey.shade400,
+                                  ),
+                                ),
                               ],
                             ),
                             /*trailing: IconButton(
                               onPressed: () {
-                                *//*_showDeleteDialog(
-                                    snapshot.data![index], context);*//*
+                                */ /*_showDeleteDialog(
+                                    snapshot.data![index], context);*/ /*
                               },
                               icon: Icon(
                                 Icons.delete,

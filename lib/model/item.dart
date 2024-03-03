@@ -8,6 +8,7 @@ class Item {
   String categoryId;
   String imageUrl;
   int createdAt;
+  bool inTop = false;
 
   Item(
       {this.id,
@@ -18,7 +19,8 @@ class Item {
       required this.unit,
       required this.categoryId,
       required this.imageUrl,
-      required this.createdAt});
+      required this.createdAt,
+      this.inTop = false});
 
   Map<String, dynamic> toJson() {
     return {
@@ -31,6 +33,7 @@ class Item {
       "categoryId": this.categoryId,
       "imageUrl": this.imageUrl,
       "createdAt": this.createdAt,
+      "inTop": this.inTop,
     };
   }
 
@@ -45,6 +48,7 @@ class Item {
       categoryId: json["categoryId"],
       imageUrl: json["imageUrl"],
       createdAt: json["createdAt"],
+      inTop: json["inTop"],
     );
   }
 //

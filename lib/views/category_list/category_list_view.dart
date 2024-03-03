@@ -118,7 +118,9 @@ class _CategoryListViewState extends State<CategoryListView> {
                   ),
                 );
               } else {
-                return Center(child: Text('No categories found'));
+                return Center(
+                  child: Text('No categories found'),
+                );
               }
             }),
       ),

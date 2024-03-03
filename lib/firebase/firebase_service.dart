@@ -8,6 +8,8 @@ import 'package:grocery_app/model/category.dart';
 import 'package:grocery_app/model/item.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../model/dashboard_data.dart';
+
 class FirebaseService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseDatabase _database = FirebaseDatabase.instance;
@@ -97,6 +99,13 @@ class FirebaseService {
       Navigator.pop(context);
       return false;
     }
+  }
+
+  Future<void> updateInTopStatus(String itemId, bool status) async {
+    // Updating the 'name' field of the product
+    await _database.ref().child("items").child(itemId).update({
+      'inTop': status,
+    });
   }
 
   Stream<List<Category>> get categoryStream {
@@ -227,6 +236,24 @@ class FirebaseService {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Stream<DashboardData> fetchDashboardData() {
+    try {
+      return _database.ref().onValue.map((event) {
+        final data = event.snapshot.value as Map<dynamic, dynamic>? ?? {};
+
+        return DashboardData(
+          totalCategories:
+              data['categories'] != null ? data['categories'].length : 0,
+          totalItems: data['items'] != null ? data['items'].length : 0,
+          totalUsers: data['users'] != null ? data['users'].length : 0,
+          totalOrders: data['orders'] != null ? data['orders'].length : 0,
+        );
+      });
+    } catch (e) {
+      throw Exception('Failed to load dashboard data');
     }
   }
 }

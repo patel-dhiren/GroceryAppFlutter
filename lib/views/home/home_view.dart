@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/constants/constants.dart';
+import 'package:grocery_app/firebase/firebase_service.dart';
 
 import '../../gen/assets.gen.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,34 +29,48 @@ class HomeView extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 1 / 1.2,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppConstant.categoryListView);
-              },
-              child: _buildDashboardTile('Categories', 0, Colors.amber.shade100,
-                  Assets.images.categories.path),
+      body: StreamBuilder(
+        stream: FirebaseService().fetchDashboardData(),
+        builder: (context, snapshot) {
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          }
+
+          final data = snapshot.data!;
+
+          return Padding(
+            padding: EdgeInsets.all(8),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1 / 1.2,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppConstant.categoryListView);
+                  },
+                  child: _buildDashboardTile('Categories', data.totalCategories, Colors.amber.shade100,
+                      Assets.images.categories.path),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppConstant.productListView);
+                  },
+                  child: _buildDashboardTile('Items', data.totalItems, Colors.blue.shade100,
+                      Assets.images.product.path),
+                ),
+                _buildDashboardTile('Users', data.totalUsers, Colors.pinkAccent.shade100,
+                    Assets.images.users.path),
+                _buildDashboardTile(
+                    'Orders', data.totalOrders, Colors.purple.shade100, Assets.images.order.path),
+              ],
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, AppConstant.productListView);
-              },
-              child: _buildDashboardTile('Items', 0, Colors.blue.shade100,
-                  Assets.images.product.path),
-            ),
-            _buildDashboardTile('Users', 0, Colors.pinkAccent.shade100,
-                Assets.images.users.path),
-            _buildDashboardTile(
-                'Orders', 0, Colors.purple.shade100, Assets.images.order.path),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

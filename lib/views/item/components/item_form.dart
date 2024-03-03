@@ -220,7 +220,7 @@ class _ItemFormState extends State<ItemForm> {
                 DropdownButtonFormField<String>(
                   value: _selectedUnit,
                   decoration: InputDecoration(labelText: 'Select Unit'),
-                  items: <String>['Kg', 'Litre', 'Piece']
+                  items: <String>['Kg', 'Litre', 'Piece','Dozen']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
