@@ -8,7 +8,9 @@ import 'package:grocery_app/views/home/home_view.dart';
 import 'package:grocery_app/views/item/item_view.dart';
 import 'package:grocery_app/views/login/login_view.dart';
 import 'package:grocery_app/views/item_list/item_list_view.dart';
+import 'package:grocery_app/views/orderlist/orderlist_view.dart';
 import 'package:grocery_app/views/splash/splash_view.dart';
+import 'package:grocery_app/views/user/user_view.dart';
 
 class AppRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -50,6 +52,16 @@ class AppRoute {
 
         return MaterialPageRoute(
           builder: (context) => ItemView(item: item,),
+        );
+
+      case AppConstant.userListView:
+        return MaterialPageRoute(
+          builder: (context) => UserListView(),
+        );
+
+      case AppConstant.orderView:
+        return MaterialPageRoute(
+          builder: (context) => OrderListView(),
         );
 
       default:

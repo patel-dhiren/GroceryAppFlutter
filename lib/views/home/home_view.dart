@@ -63,10 +63,20 @@ class _HomeViewState extends State<HomeView> {
                   child: _buildDashboardTile('Items', data.totalItems, Colors.blue.shade100,
                       Assets.images.product.path),
                 ),
-                _buildDashboardTile('Users', data.totalUsers, Colors.pinkAccent.shade100,
-                    Assets.images.users.path),
-                _buildDashboardTile(
-                    'Orders', data.totalOrders, Colors.purple.shade100, Assets.images.order.path),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppConstant.userListView);
+                  },
+                  child: _buildDashboardTile('Users', data.totalUsers, Colors.pinkAccent.shade100,
+                      Assets.images.users.path),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppConstant.orderView);
+                  },
+                  child: _buildDashboardTile(
+                      'Orders', data.totalOrders, Colors.purple.shade100, Assets.images.order.path),
+                ),
               ],
             ),
           );

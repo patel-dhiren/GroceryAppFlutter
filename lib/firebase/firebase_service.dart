@@ -9,6 +9,8 @@ import 'package:grocery_app/model/item.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../model/dashboard_data.dart';
+import '../model/order.dart';
+import '../model/user.dart';
 
 class FirebaseService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -256,4 +258,39 @@ class FirebaseService {
       throw Exception('Failed to load dashboard data');
     }
   }
+
+  Stream<List<UserData>> get userStream {
+    return _database.ref().child('users').onValue.map((event) {
+      List<UserData> categories = [];
+      if (event.snapshot.exists) {
+        Map<dynamic, dynamic> userMap =
+        event.snapshot.value as Map<dynamic, dynamic>;
+        userMap.forEach((key, value) {
+          final user = UserData.fromJson(value);
+          categories.add(user);
+        });
+      }
+      return categories;
+    });
+  }
+
+  Stream<List<Order>> get orderStream {
+    return _database
+        .ref()
+        .child('orders')
+        .onValue
+        .map((event) {
+      dynamic ordersMap = event.snapshot.value ?? {};
+      List<Order> orders = [];
+      ordersMap.forEach((key, value) {
+        orders.add(Order.fromJson(Map<String, dynamic>.from(value)));
+      });
+      return orders;
+    });
+  }
+
+  Future<void> updateOrderStatus(String orderId, String newStatus) async {
+    await _database.ref().child('orders').child(orderId).update({'status': newStatus});
+  }
+
 }
