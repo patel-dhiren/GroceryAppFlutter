@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "570297416659",
-    "project_id": "grocerystoreapp-fa367",
-    "storage_bucket": "grocerystoreapp-fa367.appspot.com"
+    "project_number": "371003238477",
+    "firebase_url": "https://grocery-app-flutter-3df3c-default-rtdb.firebaseio.com",
+    "project_id": "grocery-app-flutter-3df3c",
+    "storage_bucket": "grocery-app-flutter-3df3c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:570297416659:android:770d7fd93fdf8466dd8d26",
+        "mobilesdk_app_id": "1:371003238477:android:965b3885407a583b09d404",
         "android_client_info": {
           "package_name": "com.app.grocery_app"
         }
@@ -15,7 +16,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCbhPeDncItRtCDqlHbz07sJv-OUAxlGa0"
+          "current_key": "AIzaSyAmk0-1f2MEC3NXJlnLifvsWKPY0fUo1QE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371003238477:android:0aaaa1ee302c1baa09d404",
+        "android_client_info": {
+          "package_name": "com.app.grocery_app_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmk0-1f2MEC3NXJlnLifvsWKPY0fUo1QE"
         }
       ],
       "services": {
